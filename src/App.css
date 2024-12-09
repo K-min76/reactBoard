@@ -1,38 +1,233 @@
-.App {
+/* body 전체 스타일 */
+body {
+  padding: 1.5em;
+  background: #f4f1eb; /* 부드러운 아이보리 색 */
+  font-family: Arial, sans-serif;
+}
+
+/* 게시판 컨테이너 스타일 */
+.board-container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #c1a18d; /* 부드러운 갈색 */
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 게시판 제목 스타일 */
+.board-title {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #5d3a1f; /* 부드러운 진갈색 */
+}
+
+/* 게시글 목록 테이블 */
+.board-list {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
+  border-radius: 5px;
+  background-color: #f9f5f1; /* 부드러운 베이지 색 */
+}
+
+/* 테이블 헤더 스타일 */
+thead {
+  font-weight: bold;
+  color: #fff;
+  background: #8e7d68; /* 부드러운 갈색 */
+}
+
+/* 테이블 셀 (th, td) 스타일 */
+td, th {
+  padding: 1em .5em;
+  vertical-align: middle;
+  text-align: left;
+  font-size: 1em;
+}
+
+/* 각 셀의 배경색 */
+td {
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+  background: #fff;
+}
+
+/* 링크 스타일 */
+a {
+  color: #5d3a1f; /* 부드러운 진갈색 */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* 반응형 디자인: 작은 화면에서 테이블을 블록 형태로 변경 */
+@media all and (max-width: 768px) {
+  /* 테이블 구조를 블록으로 바꾸어 모바일에서 잘 보이게 */
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  /* 헤더 셀 정렬을 오른쪽으로 */
+  th {
+    text-align: right;
+    background: #8e7d68; /* 부드러운 갈색 */
+    color: #fff;
+  }
+
+  /* 테이블의 각 행을 수평으로 나열 */
+  tbody {
+    overflow-x: auto;
+    overflow-y: hidden;
+    position: relative;
+    white-space: nowrap;
+  }
+
+  tr {
+    display: block;
+    vertical-align: top;
+    margin-bottom: 10px;
+  }
+
+  /* 테이블의 각 셀을 분리 */
+  td {
+    border: none;
+    background: #fff;
+    padding: .5em 1em;
+    text-align: right;
+    position: relative;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  td:before {
+    /* 각 셀에 라벨을 추가하여 무엇을 의미하는지 보여줌 */
+    content: attr(data-label);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 0.9em;
+    color: #8e7d68; /* 부드러운 갈색 */
+  }
+}
+
+/* 게시글 작성 버튼 스타일 */
+.board-form-btn {
+  padding: 10px 15px;
+  background-color: #8e7d68; /* 부드러운 갈색 */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.board-form-btn:hover {
+  background-color: #7a6a55; /* 약간 진한 갈색 */
+}
+
+/* 검색 영역 스타일 */
+.search-container {
+  margin-bottom: 20px;
+}
+
+.search-container label {
+  margin-right: 10px;
+  font-size: 1em;
+  color: #8e7d68; /* 부드러운 갈색 */
+}
+
+.search-container input[type="text"] {
+  padding: 5px;
+  font-size: 1em;
+  margin-top: 5px;
+  border: 1px solid #c1a18d; /* 부드러운 갈색 */
+  border-radius: 5px;
+  width: 200px;
+}
+
+/* 게시글 작성 폼 스타일 */
+.form-container {
+  width: 60%;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #c1a18d; /* 부드러운 갈색 */
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #5d3a1f; /* 부드러운 진갈색 */
+}
+
+.form-item {
+  margin-bottom: 20px;
+}
+
+.form-item label {
+  display: block;
+  font-size: 1.1em;
+  color: #5d3a1f; /* 부드러운 진갈색 */
+  margin-bottom: 8px;
+}
+
+input[type="text"], textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #c1a18d; /* 부드러운 갈색 */
+  border-radius: 8px;
+  font-size: 1em;
+  background-color: #f9f5f1; /* 부드러운 베이지 색 */
+}
+
+input[type="text"]:focus, textarea:focus {
+  border-color: #8e7d68; /* 부드러운 갈색 */
+  background-color: #fff;
+  outline: none;
+}
+
+textarea {
+  min-height: 150px;
+}
+
+.submit-btn {
+  padding: 12px 20px;
+  background-color: #8e7d68; /* 부드러운 갈색 */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+}
+
+.submit-btn:hover {
+  background-color: #7a6a55; /* 약간 진한 갈색 */
+}
+
+.form-item-btn {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@media all and (max-width: 768px) {
+  .form-container {
+    width: 90%;
   }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  .form-title {
+    font-size: 24px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .submit-btn {
+    width: 100%;
   }
 }
