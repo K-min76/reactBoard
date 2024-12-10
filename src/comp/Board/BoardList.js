@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function BoardList({ posts }) {
-  const [searchOption, setSearchOption] = useState('title');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchOption, setSearchOption] = useState('title'); // 검색 옵션 (제목, 작성자)
+  const [searchTerm, setSearchTerm] = useState(''); // 검색어
 
   // 게시글 목록 필터링
   const filteredPosts = posts.filter(post => {
@@ -19,6 +19,7 @@ function BoardList({ posts }) {
     <div className="board-container">
       <h1 className="board-title">게시글 목록</h1>
 
+      {/* 검색 옵션과 검색어 입력창 */}
       <div className="search-container">
         <label>
           <input
@@ -46,6 +47,7 @@ function BoardList({ posts }) {
         />
       </div>
 
+      {/* 게시글 목록 테이블 */}
       <table className="board-list">
         <thead>
           <tr>
@@ -67,6 +69,7 @@ function BoardList({ posts }) {
         </tbody>
       </table>
 
+      {/* 게시글 작성 버튼 */}
       <Link to="/boardForm">
         <button className="board-form-btn">게시글 작성</button>
       </Link>

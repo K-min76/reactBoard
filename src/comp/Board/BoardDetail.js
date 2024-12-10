@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-function BoardDetail({ posts, onDeletePost, onEditPost, onRecommendPost }) {
+function BoardDetail({ posts, onDeletePost, onRecommendPost }) {
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const navigate = useNavigate();
@@ -22,16 +22,6 @@ function BoardDetail({ posts, onDeletePost, onEditPost, onRecommendPost }) {
     }
   };
 
-  const handleEdit = () => {
-    const newTitle = prompt('새 제목을 입력하세요', post.title);
-    const newContent = prompt('새 내용을 입력하세요', post.content);
-
-    if (newTitle && newContent) {
-      onEditPost(post.id, { title: newTitle, content: newContent });
-      setPost({ ...post, title: newTitle, content: newContent });
-    }
-  };
-
   const handleRecommend = () => {
     if (post) {
       onRecommendPost(post.id);
@@ -44,14 +34,18 @@ function BoardDetail({ posts, onDeletePost, onEditPost, onRecommendPost }) {
   }
 
   return (
-    <div>
+    <div className="post-detail-container">
       <h1>{post.title}</h1>
+      <p><strong>작성자:</strong> {post.author}</p>
       <p>{post.content}</p>
-      <p>추천 수: {post.recommend || 0}</p>
-      <button onClick={handleDelete}>삭제</button>
-      <button onClick={handleEdit}>수정</button>
-      <button onClick={handleRecommend}>추천</button>
-      <button onClick={() => navigate('/boardList')}>목록으로</button>
+      <p><strong>추천 수:</strong> {post.recommend || 0}</p>
+
+      <div className="post-actions">
+        <button onClick={handleDelete} className="btn-delete">삭제</button>
+        <button onClick={() => navigate(`/boardEdit/${post.id}`)} className="btn-edit">수정</button>
+        <button onClick={handleRecommend} className="btn-recommend">추천</button>
+        <button onClick={() => navigate('/boardList')} className="btn-back">목록으로</button>
+      </div>
     </div>
   );
 }
